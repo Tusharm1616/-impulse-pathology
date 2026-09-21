@@ -1,0 +1,38 @@
+export const teamMembers = [
+  {
+    name: "Dr. A. Sharma",
+    role: "Chief Pathologist",
+    img: "/team/dr-sharma.png",
+    email: "doctor1@example.com",
+    phone: "+911111111111",
+    slug: "dr-sharma",
+    bio: "Dr. Sharma is the Chief Pathologist with over 20 years of experience in diagnostics. She ensures precision and reliability in every test conducted at our lab.",
+  },
+  {
+    name: "Dr. P. Singh",
+    role: "Lab Director",
+    img: "/team/dr-p-singh.png",
+    email: "doctor2@example.com",
+    phone: "+912222222222",
+    slug: "dr-singh",
+    bio: "Dr. Singh leads the laboratory with a strong focus on innovation and advanced testing methodologies, ensuring world-class healthcare services.",
+  },
+  {
+    name: "Nurse R. Kaur",
+    role: "Lab Technician",
+    img: "/team/nurse-kaur.jpg",
+    email: "technician@example.com",
+    phone: "+913333333333",
+    slug: "nurse-kaur",
+    bio: "Nurse Kaur is a skilled lab technician, known for her dedication and accuracy in handling complex diagnostic procedures with utmost care.",
+  },
+  {
+    name: "Mr. V. Mehta",
+    role: "Patient Care Executive",
+    img: "/team/mr-mehta.jpg",
+    email: "staff@example.com",
+    phone: "+914444444444",
+    slug: "mr-mehta",
+    bio: "Mr. Mehta ensures smooth patient interactions, handling appointments and care coordination with compassion and professionalism.",
+  },
+];
