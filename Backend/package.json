@@ -1,0 +1,33 @@
+{
+  "name": "impulse-backend",
+  "version": "1.0.0",
+  "description": "Impulse Pathology Lab - Backend API",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node seed.js",
+    "db:push": "npx prisma db push",
+    "db:generate": "npx prisma generate"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "@prisma/adapter-neon": "^7.10.0",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.13",
+    "pg": "^8.23.0",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prisma": "^6.0.0"
+  }
+}

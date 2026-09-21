@@ -1,0 +1,66 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+model User {
+  id               String    @id @default(uuid())
+  name             String
+  email            String    @unique
+  password         String
+  role             String    @default("user") // "admin" or "user"
+  isVerified       Boolean   @default(false)
+  verifyToken      String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  reportsUploaded  Report[]  @relation("UploadedReports")
+}
+
+model Patient {
+  id        String    @id @default(uuid())
+  name      String
+  phone     String?
+  email     String?
+  dob       String?
+  address   String?
+  notes     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  reports   Report[]
+}
+
+model Report {
+  id         String   @id @default(uuid())
+  test       String?
+  filename   String
+  url        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  patientId  String?
+  patient    Patient? @relation(fields: [patientId], references: [id])
+
+  uploadedById String?
+  uploadedBy   User?    @relation("UploadedReports", fields: [uploadedById], references: [id])
+}
+
+model Prescription {
+  id        String   @id @default(uuid())
+  name      String?
+  phone     String?
+  email     String?
+  filename  String
+  storedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
