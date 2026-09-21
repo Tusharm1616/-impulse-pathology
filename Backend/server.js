@@ -48,7 +48,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  origin: process.env.FRONTEND_URL || process.env.CLIENT_URL || "http://localhost:3000",
   credentials: true
 }));
 app.use(express.json());
@@ -73,6 +73,9 @@ app.use("/api/prescriptions", prescriptionRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Impulse Pathology Lab API" });
 });
+app.get("/api", (req, res) => {
+  res.json({ message: "Impulse Pathology API is running" });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -80,7 +83,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Something went wrong!" });
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
+// For Vercel Serverless, we export the app. For local testing, we listen.
+if (process.env.NODE_ENV !== "production" || process.env.VERCEL !== "1") {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  });
+}
+
+module.exports = app;
