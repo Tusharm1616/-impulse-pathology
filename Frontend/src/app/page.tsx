@@ -629,19 +629,19 @@ export default function Home() {
 
         {/* Features bar fixed at the bottom center of hero */}
         <div className="absolute inset-x-0 bottom-6 z-10 px-4">
-          <div className="mx-auto max-w-5xl rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm px-6 py-3 md:px-8 md:py-4">
-            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-4 text-white/95">
+          <div className="mx-auto max-w-5xl rounded-2xl border border-white/20 bg-black/50 backdrop-blur-md shadow-2xl px-6 py-3 md:px-8 md:py-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-4 text-white drop-shadow-md">
               <li className="flex items-center justify-center gap-3">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 text-lg">🛡️</span>
-                <span className="text-sm md:text-base font-medium">NABL Accredited</span>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-lg">🛡️</span>
+                <span className="text-sm md:text-base font-bold tracking-wide">NABL Accredited</span>
               </li>
               <li className="flex items-center justify-center gap-3">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 text-lg">🏠</span>
-                <span className="text-sm md:text-base font-medium">Home Sample Collection</span>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-lg">🏠</span>
+                <span className="text-sm md:text-base font-bold tracking-wide">Home Sample Collection</span>
               </li>
               <li className="flex items-center justify-center gap-3">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 text-lg">📄</span>
-                <span className="text-sm md:text-base font-medium">Online Reports in 24 Hours</span>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-lg">📄</span>
+                <span className="text-sm md:text-base font-bold tracking-wide">Online Reports in 24 Hours</span>
               </li>
             </ul>
           </div>
