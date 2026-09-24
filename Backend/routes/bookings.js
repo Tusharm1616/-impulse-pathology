@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const prisma = require('../config/db');
+const { prisma } = require('../config/db');
 
 router.post('/', async (req, res) => {
   try {
