@@ -13,7 +13,10 @@ import { serviceData } from "@/data/servicesData";
 
 export default function Home() {
   const images = [
-    "/Hero/hero_reception.jpg"
+    "/Hero/hero_logo.jpg",
+    "/Hero/hero 2.jpg", 
+    "/Hero/hero 3.jpg", 
+    "/Hero/hero 4.jpg", 
   ];
 
   const [active, setActive] = useState(0);
