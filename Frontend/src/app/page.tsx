@@ -13,11 +13,7 @@ import { serviceData } from "@/data/servicesData";
 
 export default function Home() {
   const images = [
-    // Put hero 4 first so it appears immediately
-    "/Hero/hero 1.jpg",
-    "/Hero/hero 2.jpg", 
-    "/Hero/hero 3.jpg", 
-    "/Hero/hero 4.jpg", 
+    "/Hero/hero_reception.jpg"
   ];
 
   const [active, setActive] = useState(0);
