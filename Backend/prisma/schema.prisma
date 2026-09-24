@@ -64,3 +64,15 @@ model Prescription {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Booking {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  service   String
+  date      String
+  subTests  String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

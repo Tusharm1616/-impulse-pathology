@@ -39,6 +39,7 @@ const authRoutes = require("./routes/auth");
 const patientRoutes = require("./routes/patients");
 const reportRoutes = require("./routes/reports");
 const prescriptionRoutes = require("./routes/prescriptions");
+const bookingRoutes = require("./routes/bookings");
 
 // Initialize app
 const app = express();
@@ -68,6 +69,7 @@ app.use("/api/patients", patientRoutes); // The frontend might call /patients, b
 app.use("/api/patients", patientRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 // Root endpoint
 app.get("/", (req, res) => {

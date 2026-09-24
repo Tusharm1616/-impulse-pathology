@@ -38,7 +38,10 @@ export default function BookTestPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (service && service.subTests.length > 0 && formData.subTests.length === 0) {
@@ -46,11 +49,32 @@ export default function BookTestPage() {
       return;
     }
 
-    router.push(
-      `/booking-success?service=${encodeURIComponent(formData.service)}&date=${
-        formData.date
-      }&subTests=${encodeURIComponent(formData.subTests.join(", "))}`
-    );
+    setSubmitting(true);
+    setError(null);
+    try {
+      const base = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
+      const target = base ? `${base}/bookings` : "/api/bookings";
+      
+      const res = await fetch(target, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to book test");
+      }
+
+      router.push(
+        `/booking-success?service=${encodeURIComponent(formData.service)}&date=${
+          formData.date
+        }&subTests=${encodeURIComponent(formData.subTests.join(", "))}`
+      );
+    } catch (err: any) {
+      setError(err.message || "Failed to book test. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -151,11 +175,13 @@ export default function BookTestPage() {
 
           {/* Submit Button */}
           <div className="md:col-span-2 text-center pt-6">
+            {error && <p className="text-red-500 mb-4">{error}</p>}
             <button
               type="submit"
-              className="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg transition transform hover:scale-105"
+              disabled={submitting}
+              className="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg transition transform hover:scale-105 disabled:opacity-70 disabled:hover:scale-100"
             >
-              Confirm Booking
+              {submitting ? "Confirming..." : "Confirm Booking"}
             </button>
           </div>
         </form>
