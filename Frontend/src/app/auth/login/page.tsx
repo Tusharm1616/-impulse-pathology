@@ -25,35 +25,18 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Invalid credentials");
-        return;
-      }
-
-      // ✅ Store JWT token and user in localStorage
-      if (data?.token) {
-        localStorage.setItem("token", data.token);
-      }
-      if (data?.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
-      // ✅ Update auth context
+      // ✅ Update auth context (handles fetch natively)
       await login(email, password);
 
       alert("✅ Login successful!");
       router.push("/");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Login error:", err);
-      setError("Something went wrong. Please try again.");
+      if (err.name === 'AbortError') {
+        setError("Server is waking up, please try again.");
+      } else {
+        setError(err.message || "Something went wrong. Please try again.");
+      }
     } finally {
       setLoading(false);
     }

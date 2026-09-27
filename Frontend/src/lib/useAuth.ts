@@ -12,7 +12,7 @@ type User = {
 
 export function useAuth() {
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.10:5000";
+  const API_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
 
   const [loading, setLoading] = useState<boolean>(true);
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -25,7 +25,8 @@ export function useAuth() {
         const storedUser = localStorage.getItem("user");
         if (storedUser) setUser(JSON.parse(storedUser));
 
-        const res = await fetch(`${API_URL}/api/auth/refresh`, {
+        const target = API_URL ? `${API_URL}/api/auth/refresh` : `/api/auth/refresh`;
+        const res = await fetch(target, {
           method: "POST",
           credentials: "include", // send refresh token cookie
         });
@@ -50,7 +51,8 @@ export function useAuth() {
   const register = async (name: string, email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/register`, {
+      const target = API_URL ? `${API_URL}/api/auth/register` : `/api/auth/register`;
+      const res = await fetch(target, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -71,13 +73,19 @@ export function useAuth() {
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout for Render wake-up
+
+      const target = API_URL ? `${API_URL}/api/auth/login` : `/api/auth/login`;
+      const res = await fetch(target, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
         credentials: "include",
+        signal: controller.signal
       });
 
+      clearTimeout(timeoutId);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
 
@@ -102,7 +110,8 @@ export function useAuth() {
   const logout = async () => {
     setLoading(true);
     try {
-      await fetch(`${API_URL}/api/auth/logout`, {
+      const target = API_URL ? `${API_URL}/api/auth/logout` : `/api/auth/logout`;
+      await fetch(target, {
         method: "POST",
         credentials: "include",
       });
@@ -125,7 +134,8 @@ export function useAuth() {
     let res = await fetch(input, { ...init, headers, credentials: "include" });
 
     if (res.status === 401) {
-      const refreshRes = await fetch(`${API_URL}/api/auth/refresh`, {
+      const target = API_URL ? `${API_URL}/api/auth/refresh` : `/api/auth/refresh`;
+      const refreshRes = await fetch(target, {
         method: "POST",
         credentials: "include",
       });
