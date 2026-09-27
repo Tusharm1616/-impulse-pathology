@@ -322,10 +322,10 @@ export default function AccountPage() {
                 {data.map((b: any) => (
                   <li key={b.id} className="py-3 flex items-center justify-between">
                     <div>
-                      <div className="font-medium text-gray-900">{b.package || b.title}</div>
-                      <div className="text-sm text-gray-600">{b.date} {b.time}</div>
+                      <div className="font-medium text-gray-900">{b.service || b.package || b.title}</div>
+                      <div className="text-sm text-gray-600">{b.date}</div>
                     </div>
-                    <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">{b.status || "Booked"}</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">{b.status || "Confirmed"}</span>
                   </li>
                 ))}
               </ul>

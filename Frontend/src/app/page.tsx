@@ -353,12 +353,10 @@ export default function Home() {
   }, []);
 
   const testimonials = [
-    { name: "Amit Patil", city: "Pune", rating: 5, text: "Excellent service! Got my reports within hours.", avatar: undefined },
-    { name: "Priya Sharma", city: "Nashik", rating: 5, text: "The staff is very professional and caring.", avatar: undefined },
-    { name: "Rahul Mehta", city: "Pimpri", rating: 5, text: "Booking a test online was so easy and quick.", avatar: undefined },
-    { name: "Sneha Joshi", city: "Wakad", rating: 5, text: "Home collection was punctual and hassle-free.", avatar: undefined },
-    { name: "Vikram Rao", city: "Hinjawadi", rating: 5, text: "Clean lab and very professional staff.", avatar: undefined },
-    { name: "Neha Desai", city: "Baner", rating: 5, text: "Reports were easy to access online.", avatar: undefined },
+    { name: "[PLACEHOLDER NAME]", city: "[PLACEHOLDER CITY]", rating: 5, text: "[PLACEHOLDER TESTIMONIAL TEXT - REPLACE WITH REAL REVIEW]", avatar: undefined },
+    { name: "[PLACEHOLDER NAME]", city: "[PLACEHOLDER CITY]", rating: 5, text: "[PLACEHOLDER TESTIMONIAL TEXT - REPLACE WITH REAL REVIEW]", avatar: undefined },
+    { name: "[PLACEHOLDER NAME]", city: "[PLACEHOLDER CITY]", rating: 5, text: "[PLACEHOLDER TESTIMONIAL TEXT - REPLACE WITH REAL REVIEW]", avatar: undefined },
+    { name: "[PLACEHOLDER NAME]", city: "[PLACEHOLDER CITY]", rating: 5, text: "[PLACEHOLDER TESTIMONIAL TEXT - REPLACE WITH REAL REVIEW]", avatar: undefined },
   ];
   const testiRef = useRef<HTMLDivElement | null>(null);
 
@@ -677,12 +675,9 @@ export default function Home() {
           {/* Features unified array */}
           {(() => {
             const whyFeatures = [
-              { title: "NABL Accredited", desc: "Our laboratory is NABL accredited ensuring highest quality standards.", icon: <ShieldCheck className="h-6 w-6 text-white" /> },
-              { title: "Quick Results", desc: "Get your test reports within 24 hours with our automated systems.", icon: <Clock className="h-6 w-6 text-white" /> },
-              { title: "Expert Team", desc: "Experienced pathologists with years of expertise in diagnostic medicine.", icon: <Users className="h-6 w-6 text-white" /> },
-              { title: "Home Collection", desc: "Convenient sample collection from your home with trained phlebotomists.", icon: <HomeIcon className="h-6 w-6 text-white" /> },
-              { title: "Digital Reports", desc: "Access your reports online anytime through our secure platform.", icon: <Smartphone className="h-6 w-6 text-white" /> },
-              { title: "Affordable Pricing", desc: "Competitive pricing with various health packages and discounts.", icon: <CreditCard className="h-6 w-6 text-white" /> },
+              { title: "[PLACEHOLDER FEATURE]", desc: "[PLACEHOLDER DESCRIPTION FOR FEATURE]", icon: <ShieldCheck className="h-6 w-6 text-white" /> },
+              { title: "[PLACEHOLDER FEATURE]", desc: "[PLACEHOLDER DESCRIPTION FOR FEATURE]", icon: <Clock className="h-6 w-6 text-white" /> },
+              { title: "[PLACEHOLDER FEATURE]", desc: "[PLACEHOLDER DESCRIPTION FOR FEATURE]", icon: <Users className="h-6 w-6 text-white" /> },
             ];
             
             return (
