@@ -5,18 +5,17 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 
+import { useAuth } from "@/lib/useAuth";
+
 export default function RegisterPage() {
   const router = useRouter();
+  const { register } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Automatically detect API URL (fallback to localhost)
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_URL || "https://impulselab.com";
 
   // Handle manual registration
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,25 +24,13 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Registration failed. Please try again.");
-        setLoading(false);
-        return;
-      }
+      await register(name, email, password);
 
       alert("✅ Registration successful! Please log in.");
       router.push("/auth/login");
     } catch (err: any) {
       console.error("Registration error:", err);
-      setError("Something went wrong. Please check your server connection.");
+      setError(err.message || "Something went wrong. Please check your server connection.");
     } finally {
       setLoading(false);
     }

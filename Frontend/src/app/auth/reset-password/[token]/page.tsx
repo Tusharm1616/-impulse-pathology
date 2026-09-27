@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiFetch } from "@/lib/api";
 
 export default function ResetPasswordPage({ params }: { params: { token: string } }) {
   const router = useRouter();
@@ -10,7 +11,6 @@ export default function ResetPasswordPage({ params }: { params: { token: string 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,13 +23,11 @@ export default function ResetPasswordPage({ params }: { params: { token: string 
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/reset-password/${params.token}`, {
+      await apiFetch(`/api/auth/reset-password/${params.token}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Reset failed");
+
 
       setMessage("✅ Password reset successful!");
       setTimeout(() => router.push("/auth/login"), 2000);

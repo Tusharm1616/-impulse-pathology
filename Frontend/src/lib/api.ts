@@ -18,7 +18,16 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
     }
     throw new Error('Unauthorized');
   }
-  if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+  if (!res.ok) {
+    let errMessage = `Request failed: ${res.status}`;
+    try {
+      const data = await res.json();
+      if (data && data.message) errMessage = data.message;
+    } catch (e) {
+      // Ignore json parse errors for non-json responses
+    }
+    throw new Error(errMessage);
+  }
   return res.json();
 }
 

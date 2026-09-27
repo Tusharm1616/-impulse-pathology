@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { apiFetch } from "@/lib/api";
 
 export default function ResendVerificationPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,18 +16,10 @@ export default function ResendVerificationPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/resend-verification`, {
+      await apiFetch("/api/auth/resend-verification", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Failed to resend verification email.");
-        return;
-      }
 
       setMessage("✅ Verification email sent successfully! Check your inbox.");
       setEmail("");
