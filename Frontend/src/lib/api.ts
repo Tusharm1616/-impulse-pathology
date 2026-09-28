@@ -1,4 +1,4 @@
-export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+export async function apiFetch<T = any>(path: string, init: RequestInit = {}): Promise<T> {
   const base = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
   const url = base ? `${base}${path}` : path.startsWith("/api") ? path : `/api${path}`;
   // Detect FormData to avoid setting JSON header
