@@ -36,7 +36,7 @@ export default function BookingsPage() {
   async function fetchBookings() {
     setLoading(true);
     try {
-      const data = await apiFetch<Booking[]>("/bookings");
+      const data = await apiFetch<Booking[]>("/api/bookings");
       setBookings(data);
     } catch (err: any) {
       setError(err.message || "Failed to load bookings");
@@ -47,7 +47,7 @@ export default function BookingsPage() {
 
   async function updateStatus(id: string, status: string) {
     try {
-      const updated = await apiFetch(`/bookings/${id}/status`, {
+      const updated = await apiFetch(`/api/bookings/${id}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status })
       });

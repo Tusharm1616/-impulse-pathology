@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { FaDownload, FaEye, FaSearch } from "react-icons/fa";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import QRCode from "react-qr-code";
+import { apiFetch } from "@/lib/api";
 
 export default function ReportSection() {
   const [reports, setReports] = useState<any[]>([]);
@@ -14,14 +15,12 @@ export default function ReportSection() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await fetch("/api/reports", {
+        const data = await apiFetch<any[]>("/api/reports", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`, // token saved at login
           },
         });
-        if (!res.ok) throw new Error("Failed to fetch reports");
-        const data = await res.json();
         setReports(data);
       } catch (err) {
         console.error("Error fetching reports:", err);

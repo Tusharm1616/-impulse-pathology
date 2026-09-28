@@ -19,7 +19,7 @@ export default function AdminPatientsPage() {
     setLoading(true);
     setError(null);
     try {
-      const list = await apiFetch<Patient[]>("/patients");
+      const list = await apiFetch<Patient[]>("/api/patients");
       setItems(list);
     } catch (e: any) {
       setError(e.message);
@@ -34,7 +34,7 @@ export default function AdminPatientsPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const created = await apiFetch<Patient>("/patients", {
+      const created = await apiFetch<Patient>("/api/patients", {
         method: "POST",
         body: JSON.stringify({ name, phone, dob }),
       });

@@ -73,28 +73,28 @@ export default function AccountPage() {
         let url = "";
         switch (current) {
           case "prescriptions":
-            url = "/prescriptions/list";
+            url = "/api/prescriptions/list";
             break;
           case "bookings":
-            url = "/bookings";
+            url = "/api/bookings";
             break;
           case "reports":
-            url = "/reports";
+            url = "/api/reports";
             break;
           case "address":
-            url = "/addresses";
+            url = "/api/addresses";
             break;
           case "membership":
-            url = "/memberships";
+            url = "/api/memberships";
             break;
           case "family":
-            url = "/family";
+            url = "/api/family";
             break;
           case "notifications":
-            url = "/notifications";
+            url = "/api/notifications";
             break;
           case "profile":
-            url = "/me";
+            url = "/api/auth/me";
             break;
         }
         if (!url) {

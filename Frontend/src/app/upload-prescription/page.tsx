@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { apiFetch } from "@/lib/api";
+
 export default function UploadPrescriptionPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -28,17 +30,10 @@ export default function UploadPrescriptionPage() {
       form.append("notes", notes);
       form.append("file", file);
 
-      const base = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
-      const target = base ? `${base}/prescriptions` : "/api/prescriptions";
-      const res = await fetch(target, {
+      await apiFetch("/api/prescriptions", {
         method: "POST",
         body: form,
       });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err?.error || "Upload failed");
-      }
 
       setMessage("Thank you! Your prescription was uploaded. Our team will contact you soon to confirm tests and schedule.");
       setName("");

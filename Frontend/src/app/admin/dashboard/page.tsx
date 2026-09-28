@@ -13,8 +13,8 @@ export default function AdminDashboardPage() {
     async function load() {
       setLoading(true);
       const [p, r] = await Promise.all([
-        apiFetch<any[]>("/patients"),
-        apiFetch<any[]>("/reports"),
+        apiFetch<any[]>("/api/patients"),
+        apiFetch<any[]>("/api/reports"),
       ]);
       setStats({ patients: p.length || 0, reports: r.length || 0 });
       setRecentPatients(p.slice(0,5));

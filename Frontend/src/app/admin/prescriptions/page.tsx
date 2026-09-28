@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { apiFetch } from "@/lib/api";
 import { useAuth } from "@/lib/useAuth";
 
 type Item = {
@@ -43,10 +44,7 @@ export default function AdminPrescriptionsPage() {
       setLoading(true);
       setError(null);
       try {
-        const target = base ? `${base}/prescriptions/list` : "/api/prescriptions/list";
-        const res = await fetch(target, { cache: "no-store" });
-        if (!res.ok) throw new Error("Failed to load submissions");
-        const data = await res.json();
+        const data = await apiFetch<any[]>("/api/prescriptions/list", { cache: "no-store" });
         setItems(Array.isArray(data) ? data : []);
       } catch (e: any) {
         setError(e.message || "Error loading submissions");
@@ -111,7 +109,7 @@ export default function AdminPrescriptionsPage() {
                         <td className="px-4 py-3">
                           <a
                             className="text-emerald-700 hover:underline"
-                            href={(base ? `${base}` : `/api`) + `/prescriptions/file?name=${encodeURIComponent(it.filename)}`}
+                            href={(base ? `${base}` : "") + `/api/prescriptions/file?name=${encodeURIComponent(it.filename)}`}
                             target="_blank"
                             rel="noreferrer"
                           >

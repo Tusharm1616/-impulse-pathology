@@ -4,6 +4,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { serviceData } from "@/data/servicesData";
 
+import { apiFetch } from "@/lib/api";
+
 export default function BookTestPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -52,18 +54,10 @@ export default function BookTestPage() {
     setSubmitting(true);
     setError(null);
     try {
-      const base = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
-      const target = base ? `${base}/bookings` : "/api/bookings";
-      
-      const res = await fetch(target, {
+      await apiFetch("/api/bookings", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to book test");
-      }
 
       router.push(
         `/booking-success?service=${encodeURIComponent(formData.service)}&date=${

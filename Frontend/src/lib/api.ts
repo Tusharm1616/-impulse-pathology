@@ -22,7 +22,10 @@ export async function apiFetch<T = any>(path: string, init: RequestInit = {}): P
     let errMessage = `Request failed: ${res.status}`;
     try {
       const data = await res.json();
-      if (data && data.message) errMessage = data.message;
+      if (data) {
+        if (data.message) errMessage = data.message;
+        else if (data.error) errMessage = data.error;
+      }
     } catch (e) {
       // Ignore json parse errors for non-json responses
     }

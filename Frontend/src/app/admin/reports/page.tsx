@@ -19,7 +19,7 @@ export default function AdminReportsPage() {
     setLoading(true);
     setError(null);
     try {
-      const list = await apiFetch<Report[]>("/reports");
+      const list = await apiFetch<Report[]>("/api/reports");
       setItems(list);
     } catch (e: any) {
       setError(e.message);
@@ -38,7 +38,7 @@ export default function AdminReportsPage() {
       if (patientId) fd.append("patientId", patientId);
       if (test) fd.append("test", test);
       fd.append("file", file);
-      const created = await apiFetch<Report>("/reports", { method: "POST", body: fd });
+      const created = await apiFetch<Report>("/api/reports", { method: "POST", body: fd });
       setItems((prev) => [ { ...created, patientId, test, url: created.url || "#" }, ...prev ]);
       setPatientId(""); setTest(""); setFile(null);
     } catch (e: any) {
