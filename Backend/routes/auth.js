@@ -10,6 +10,13 @@ const { protect } = require("../middleware/auth");
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+};
+
 // ─── POST /api/auth/register ─────────────────────────────────────────────────
 router.post("/register", async (req, res) => {
   try {
@@ -35,6 +42,7 @@ router.post("/register", async (req, res) => {
     });
 
     const token = signToken(user.id);
+    res.cookie("token", token, cookieOptions);
 
     res.status(201).json({
       message: "Registration successful",
@@ -71,6 +79,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = signToken(user.id);
+    res.cookie("token", token, cookieOptions);
 
     res.json({
       message: "Login successful",
@@ -123,6 +132,7 @@ router.post("/refresh", async (req, res) => {
 
     // Issue a fresh token
     const newToken = signToken(user.id);
+    res.cookie("token", newToken, cookieOptions);
 
     res.json({
       accessToken: newToken,
@@ -136,7 +146,11 @@ router.post("/refresh", async (req, res) => {
 
 // ─── POST /api/auth/logout ───────────────────────────────────────────────────
 router.post("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+  });
   res.json({ message: "Logged out" });
 });
 
