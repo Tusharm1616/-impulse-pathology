@@ -153,7 +153,7 @@ export default function Navbar() {
                       </div>
                       <div className="p-2" role="menu">
                         <Link href="/upload-prescription" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🧾 <span>My Prescriptions</span></Link>
-                        <Link href="/services" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🗓️ <span>My Booking</span></Link>
+                        <Link href="/account?tab=bookings" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🗓️ <span>My Booking</span></Link>
                         <Link href="/account?tab=reports" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📁 <span>My Report</span></Link>
                         <Link href="/account?tab=address" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📍 <span>My Address</span></Link>
                         <Link href="/account?tab=membership" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>💳 <span>My Membership Cards</span></Link>

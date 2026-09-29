@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFetch } from "@/lib/api";
-import { useAuth } from "@/lib/useAuth";
 
 type Item = {
   storedAt: string;
@@ -14,32 +12,13 @@ type Item = {
 };
 
 export default function AdminPrescriptionsPage() {
-  const { user } = useAuth();
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const base = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "");
-  const useRewrite = String(process.env.NEXT_PUBLIC_USE_REWRITE || "").toLowerCase() === "true";
-  const allowedDomain = (process.env.NEXT_PUBLIC_ADMIN_DOMAIN || "").toLowerCase();
-  const allowedEmails = useMemo(
-    () => (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").toLowerCase().split(/[,;\s]+/).filter(Boolean),
-    []
-  );
-
-  const authorized = useMemo(() => {
-    const email = (user?.email || user?.name || "").toLowerCase();
-    if (!email) return false;
-    if (allowedEmails.length && allowedEmails.includes(email)) return true;
-    if (allowedDomain && email.endsWith(`@${allowedDomain}`)) return true;
-    return false;
-  }, [user, allowedDomain, allowedEmails]);
 
   useEffect(() => {
-    if (!authorized) {
-      setLoading(false);
-      return;
-    }
     async function load() {
       setLoading(true);
       setError(null);
@@ -54,77 +33,74 @@ export default function AdminPrescriptionsPage() {
       }
     }
     load();
-  }, [authorized, base]);
+  }, []);
 
   return (
-    <main className="min-h-[calc(100dvh-64px)] bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-gray-900">Prescription Submissions</h1>
-          <Link href="/" className="text-emerald-700 hover:underline">← Back to Home</Link>
-        </div>
-
-        {!user && (
-          <p className="text-gray-700">Please <Link href="/auth/login" className="text-emerald-700 underline">log in</Link> with your official lab email to view submissions.</p>
-        )}
-
-        {user && !authorized && (
-          <p className="text-gray-700">Access restricted. Use your official lab email{allowedDomain ? ` (@${allowedDomain})` : ""}.</p>
-        )}
-
-        {authorized && (
-          <>
-            {!base && !useRewrite && (
-              <div className="mb-4 rounded-md bg-yellow-50 p-3 text-yellow-800">
-                Set <code>NEXT_PUBLIC_API_BASE_URL</code> to your backend to load data.
-              </div>
-            )}
-            {loading ? (
-              <p className="text-gray-600">Loading...</p>
-            ) : error ? (
-              <p className="text-red-600">{error}</p>
-            ) : items.length === 0 ? (
-              <p className="text-gray-600">No submissions yet.</p>
-            ) : (
-              <div className="overflow-x-auto bg-white rounded-xl shadow">
-                <table className="min-w-full text-left text-sm">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="px-4 py-3 font-medium text-gray-700">When</th>
-                      <th className="px-4 py-3 font-medium text-gray-700">Name</th>
-                      <th className="px-4 py-3 font-medium text-gray-700">Phone</th>
-                      <th className="px-4 py-3 font-medium text-gray-700">Email</th>
-                      <th className="px-4 py-3 font-medium text-gray-700">File</th>
-                      <th className="px-4 py-3 font-medium text-gray-700">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items.map((it, idx) => (
-                      <tr key={idx} className="border-t">
-                        <td className="px-4 py-3 text-gray-800">{new Date(it.storedAt).toLocaleString()}</td>
-                        <td className="px-4 py-3 text-gray-800">{it.name || "-"}</td>
-                        <td className="px-4 py-3 text-gray-800">{it.phone || "-"}</td>
-                        <td className="px-4 py-3 text-gray-800">{it.email || "-"}</td>
-                        <td className="px-4 py-3 text-gray-800">{it.filename}</td>
-                        <td className="px-4 py-3">
-                          <a
-                            className="text-emerald-700 hover:underline"
-                            href={(base ? `${base}` : "") + `/api/prescriptions/file?name=${encodeURIComponent(it.filename)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Download
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </>
-        )}
+    <div className="space-y-6">
+      <div className="flex justify-between items-center mb-2">
+        <h1 className="text-2xl font-bold text-gray-800">Prescriptions</h1>
       </div>
-    </main>
+
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
+          <h2 className="text-lg font-semibold text-gray-800">Uploaded Prescriptions</h2>
+          <span className="text-sm text-gray-600">{loading ? "Loading..." : `${items.length} prescription(s)`}</span>
+        </div>
+        
+        {error && <div className="p-4 text-red-600 bg-red-50">{error}</div>}
+        
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-gray-200 text-sm text-gray-500 bg-white">
+                <th className="px-6 py-3 font-medium">Date Uploaded</th>
+                <th className="px-6 py-3 font-medium">Patient Details</th>
+                <th className="px-6 py-3 font-medium">File Name</th>
+                <th className="px-6 py-3 font-medium text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {loading && items.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="px-6 py-8 text-center text-gray-500">Loading prescriptions...</td>
+                </tr>
+              ) : items.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="px-6 py-8 text-center text-gray-500">No prescriptions uploaded yet.</td>
+                </tr>
+              ) : (
+                items.map((it, idx) => (
+                  <tr key={idx} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {new Date(it.storedAt).toLocaleString()}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="font-medium text-gray-900">{it.name || "Unknown Patient"}</div>
+                      <div className="text-sm text-gray-500">{it.phone || "-"} • {it.email || "-"}</div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-800 font-medium">
+                      {it.filename}
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <a 
+                        href={(base ? `${base}` : "") + `/api/prescriptions/file?name=${encodeURIComponent(it.filename)}`}
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 }
