@@ -14,7 +14,7 @@ export async function apiFetch<T = any>(path: string, init: RequestInit = {}): P
   if (res.status === 401) {
     if (typeof window !== 'undefined') {
       const next = encodeURIComponent(window.location.pathname + window.location.search);
-      window.location.href = `/admin/login?next=${next}`;
+      window.location.href = `/auth/login?tab=staff&next=${next}`;
     }
     throw new Error('Unauthorized');
   }

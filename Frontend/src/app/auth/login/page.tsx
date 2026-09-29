@@ -30,7 +30,8 @@ function LoginForm() {
           setError("This login is for authorized staff only");
           return;
         }
-        router.push("/admin/dashboard");
+        const nextUrl = searchParams.get("next") || "/admin/dashboard";
+        router.push(nextUrl);
       } else {
         alert("✅ Login successful!");
         router.push("/");
