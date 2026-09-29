@@ -10,7 +10,6 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    console.log('Prisma object exists:', !!prisma);
     const booking = await prisma.booking.create({
       data: {
         name,
