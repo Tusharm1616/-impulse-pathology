@@ -10,9 +10,12 @@ export default function AdminDashboardPage() {
   const [recentBookings, setRecentBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     async function load() {
       setLoading(true);
+      setError(null);
       try {
         const [p, b] = await Promise.all([
           apiFetch<any[]>("/api/patients"),
@@ -32,14 +35,19 @@ export default function AdminDashboardPage() {
           byStatus: statusCounts
         });
         setRecentBookings(bookingsList.slice(0, 5));
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        setError(err.message || "Failed to load");
       } finally {
         setLoading(false);
       }
     }
     load();
   }, []);
+
+  if (error) {
+    return <div className="p-6 text-red-600 font-semibold">{error}</div>;
+  }
 
   return (
     <div className="space-y-6">

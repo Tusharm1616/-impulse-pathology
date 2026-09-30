@@ -36,6 +36,7 @@ const { connectDB } = require("./config/db");
 
 // Import routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
 const patientRoutes = require("./routes/patients");
 const reportRoutes = require("./routes/reports");
 const prescriptionRoutes = require("./routes/prescriptions");
@@ -74,6 +75,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Mount routes
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/patients", patientRoutes); // The frontend might call /patients, but typically we prefix /api
 // Update: looking at the frontend code, we saw apiFetch calling `/patients` which resolves to `/api/patients` usually,
 // but let's mount them directly at /api to match next.js api routes structure or standard backend practices
