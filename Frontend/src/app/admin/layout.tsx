@@ -22,7 +22,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (!loading) {
       if (!user || user.role !== "admin") {
-        router.push("/auth/login?tab=staff");
+        const nextUrl = encodeURIComponent(pathname || "/admin/dashboard");
+        router.push(`/auth/login?tab=staff&next=${nextUrl}`);
       } else {
         setAuthChecked(true);
       }

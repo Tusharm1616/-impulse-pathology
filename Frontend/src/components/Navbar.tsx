@@ -152,18 +152,18 @@ export default function Navbar() {
                         </div>
                       </div>
                       <div className="p-2" role="menu">
-                        <Link href="/upload-prescription" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🧾 <span>My Prescriptions</span></Link>
-                        <Link href="/account?tab=bookings" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🗓️ <span>My Booking</span></Link>
-                        <Link href="/account?tab=reports" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📁 <span>My Report</span></Link>
-                        <Link href="/account?tab=address" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📍 <span>My Address</span></Link>
-                        <Link href="/account?tab=membership" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>💳 <span>My Membership Cards</span></Link>
-                        <Link href="/account?tab=family" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>👥 <span>My Family Members</span></Link>
-                        <Link href="/account" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>👤 <span>My Profile</span></Link>
-                        <Link href="/account?tab=notifications" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🔔 <span>My Notification</span></Link>
-                        {isAdmin && (
+                        {isAdmin ? (
+                          <Link href="/admin/dashboard" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 font-semibold text-emerald-900" onClick={() => setProfileOpen(false)}>🛡️ <span>Admin Dashboard</span></Link>
+                        ) : (
                           <>
-                            <div className="my-1 border-t border-gray-200" />
-                            <Link href="/admin/prescriptions" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🛡️ <span>Admin</span></Link>
+                            <Link href="/upload-prescription" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🧾 <span>My Prescriptions</span></Link>
+                            <Link href="/account?tab=bookings" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🗓️ <span>My Booking</span></Link>
+                            <Link href="/account?tab=reports" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📁 <span>My Report</span></Link>
+                            <Link href="/account?tab=address" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>📍 <span>My Address</span></Link>
+                            <Link href="/account?tab=membership" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>💳 <span>My Membership Cards</span></Link>
+                            <Link href="/account?tab=family" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>👥 <span>My Family Members</span></Link>
+                            <Link href="/account" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>👤 <span>My Profile</span></Link>
+                            <Link href="/account?tab=notifications" role="menuitem" className="relative z-10 flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100" onClick={() => setProfileOpen(false)}>🔔 <span>My Notification</span></Link>
                           </>
                         )}
                         <button
@@ -253,8 +253,8 @@ export default function Navbar() {
               <Link href="/about" onClick={() => setMobileOpen(false)} className="py-2 text-[#333] hover:text-[#009B72] transition-colors">About</Link>
               <Link href="/contact" onClick={() => setMobileOpen(false)} className="py-2 text-[#333] hover:text-[#009B72] transition-colors">Contact</Link>
               {isAdmin && (
-                <Link href="/admin/prescriptions" onClick={() => setMobileOpen(false)} className="px-3 py-3 rounded border border-gray-200 text-[#333] text-center">
-                  Admin
+                <Link href="/admin/dashboard" onClick={() => setMobileOpen(false)} className="px-3 py-3 rounded border border-gray-200 text-[#333] text-center">
+                  Admin Dashboard
                 </Link>
               )}
               {!displayName ? (
