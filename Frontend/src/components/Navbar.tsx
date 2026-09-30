@@ -18,7 +18,7 @@ export default function Navbar() {
   const allowedDomain = (process.env.NEXT_PUBLIC_ADMIN_DOMAIN || "").toLowerCase();
   const allowedEmails = useMemo(() => (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").toLowerCase().split(/[,;\s]+/).filter(Boolean), []);
   const userEmail = (typeof email === "string" ? email : "").toLowerCase();
-  const isAdmin = !!userEmail && ((allowedDomain && userEmail.endsWith(`@${allowedDomain}`)) || (allowedEmails.length > 0 && allowedEmails.includes(userEmail)));
+  const isAdmin = user?.role === "admin" || (!!userEmail && ((allowedDomain && userEmail.endsWith(`@${allowedDomain}`)) || (allowedEmails.length > 0 && allowedEmails.includes(userEmail))));
   const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
