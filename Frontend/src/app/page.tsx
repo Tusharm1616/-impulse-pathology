@@ -1217,7 +1217,7 @@ export default function Home() {
                           <div className="mt-4">
                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 border border-white/30 px-3 py-1 text-sm">
                               <span>⏰</span>
-                              <span>Mon–Sun: 7:00 AM – 10:00 PM</span>
+                              <span>Open 24 Hours, 7 Days a Week</span>
                             </div>
                           </div>
                           <div className="mt-5">
@@ -1268,7 +1268,7 @@ export default function Home() {
                     <div className="mt-4">
                       <div className="inline-flex items-center gap-2 rounded-full bg-white/20 border border-white/30 px-3 py-1 text-sm">
                         <span>⏰</span>
-                        <span>Mon–Sun: 7:00 AM – 10:00 PM</span>
+                        <span>Open 24 Hours, 7 Days a Week</span>
                       </div>
                     </div>
                     <div className="mt-5">

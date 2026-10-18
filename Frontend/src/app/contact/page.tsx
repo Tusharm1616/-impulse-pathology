@@ -20,7 +20,7 @@ import {
   LAB_WHATSAPP_URL,
   LAB_MAPS_SEARCH_URL,
   LAB_MAPS_EMBED_URL,
-  LAB_WORKING_HOURS,
+  LAB_HOURS,
 } from "@/lib/siteConfig";
 
 export default function ContactPage() {
@@ -138,12 +138,15 @@ export default function ContactPage() {
             <p className="text-brand-textB text-sm sm:text-base leading-relaxed mb-1">
               Send us reports, queries, or feedback
             </p>
-            <div className="mt-2 flex-grow flex items-center">
+            <div className="mt-2 flex-grow flex items-center justify-center w-full max-w-full">
               <a
                 href={LAB_EMAIL_MAILTO}
-                className="text-sm sm:text-base font-semibold text-[#0E3A45] hover:text-[#009B72] transition-colors break-all"
+                className="text-[13px] sm:text-sm lg:text-[13px] xl:text-sm font-semibold text-[#0E3A45] hover:text-[#009B72] transition-colors break-words [overflow-wrap:anywhere] max-w-full text-center leading-snug"
+                title={LAB_EMAIL}
               >
-                {LAB_EMAIL}
+                <span className="inline-block">impulsepathologylaboratory</span>
+                <wbr />
+                <span className="inline-block">@gmail.com</span>
               </a>
             </div>
             <a
@@ -156,8 +159,8 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Working Hours Card (Placeholder) */}
-        <div className="mt-6 bg-white rounded-2xl p-5 shadow-soft border border-dashed border-[#009B72]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Working Hours Card */}
+        <div className="mt-6 bg-white rounded-2xl p-5 shadow-soft border border-brand-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 text-center sm:text-left">
             <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#009B72] flex items-center justify-center flex-shrink-0">
               <FaClock className="text-lg" />
@@ -166,14 +169,15 @@ export default function ContactPage() {
               <span className="text-xs uppercase font-bold tracking-wider text-emerald-700 block">
                 Working Hours
               </span>
-              <span className="text-sm sm:text-base font-semibold text-brand-textH">
-                {LAB_WORKING_HOURS}
+              <span className="text-base sm:text-lg font-bold text-brand-textH">
+                {LAB_HOURS}
               </span>
             </div>
           </div>
-          <span className="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-medium">
-            Subject to confirmation
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#009B72] text-xs font-semibold border border-emerald-200/60">
+            <span className="w-2 h-2 rounded-full bg-[#009B72] animate-pulse"></span>
+            <span>24/7 Available</span>
+          </div>
         </div>
 
         {/* Interactive Google Map Section */}

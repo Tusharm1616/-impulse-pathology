@@ -22,5 +22,6 @@ export const LAB_WHATSAPP_URL = `https://wa.me/919373253743?text=${encodeURIComp
 export const LAB_MAPS_SEARCH_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Impulse Pathology Laboratory, Laxmi Chowk, Marunji Road, Near Gurukrupa Hospital, Pune, Maharashtra – 411057")}`;
 export const LAB_MAPS_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent("Impulse Pathology Laboratory, Laxmi Chowk, Marunji Road, Near Gurukrupa Hospital, Pune 411057")}&output=embed`;
 
-// Working hours placeholder for easy editing
-export const LAB_WORKING_HOURS = "Mon–Sat: 7:00 AM – 9:00 PM [PLACEHOLDER: confirm hours]";
+// Working hours
+export const LAB_HOURS = "Open 24 Hours, 7 Days a Week";
+export const LAB_WORKING_HOURS = LAB_HOURS;

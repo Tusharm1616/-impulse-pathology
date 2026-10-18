@@ -67,7 +67,11 @@ export default function ContactModal() {
                 className="flex items-center gap-3 bg-gray-50 hover:bg-emerald-50 px-4 py-3 rounded-xl transition border border-gray-100"
               >
                 <FaEnvelope className="text-[#009B72] text-lg flex-shrink-0" />
-                <span className="font-semibold text-gray-800 text-xs sm:text-sm break-all">{LAB_EMAIL}</span>
+                <span className="font-semibold text-gray-800 text-[12px] sm:text-xs break-words [overflow-wrap:anywhere] leading-snug">
+                  <span className="inline-block">impulsepathologylaboratory</span>
+                  <wbr />
+                  <span className="inline-block">@gmail.com</span>
+                </span>
               </a>
 
               {/* WhatsApp Inside Modal */}

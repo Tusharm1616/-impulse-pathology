@@ -22,7 +22,7 @@ export const branches: Branch[] = [
     address: "Laxmi Chowk, Marunji Road, Near Gurukrupa Hospital, Pune, Maharashtra – 411057",
     rating: 4.6,
     reviews: 46,
-    openHours: "Open 24 hours, all 7 days",
+    openHours: "Open 24 Hours, 7 Days a Week",
   },
   {
     id: "kaspatewasti-wakad",
