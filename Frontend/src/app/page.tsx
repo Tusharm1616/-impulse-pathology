@@ -1313,7 +1313,7 @@ export default function Home() {
           {/* Bottom Actions */}
           <RevealOnScroll delay={200}>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="tel:+919309883798" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#00C29A] to-[#00A1FF] text-white font-semibold shadow hover:shadow-lg transition-transform hover:scale-[1.02]">
+              <a href="tel:+919373253743" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#00C29A] to-[#00A1FF] text-white font-semibold shadow hover:shadow-lg transition-transform hover:scale-[1.02]">
                 <span>📞</span>
                 <span>Call Now</span>
               </a>

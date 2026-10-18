@@ -1,86 +1,217 @@
 // src/app/contact/page.tsx
 "use client";
 
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import { 
+  FaMapMarkerAlt, 
+  FaPhoneAlt, 
+  FaEnvelope, 
+  FaWhatsapp, 
+  FaClock, 
+  FaDirections,
+  FaExternalLinkAlt 
+} from "react-icons/fa";
+import {
+  LAB_NAME,
+  LAB_ADDRESS,
+  LAB_PHONE_DISPLAY,
+  LAB_PHONE_TEL,
+  LAB_EMAIL,
+  LAB_EMAIL_MAILTO,
+  LAB_WHATSAPP_URL,
+  LAB_MAPS_SEARCH_URL,
+  LAB_MAPS_EMBED_URL,
+  LAB_WORKING_HOURS,
+} from "@/lib/siteConfig";
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold">Contact Us</h1>
-        <p className="mt-2 text-lg">We’re here to help you anytime!</p>
-      </div>
-
-      {/* Contact Cards */}
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Address */}
-        <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-2xl transition">
-          <div className="flex justify-center">
-            <FaMapMarkerAlt className="text-blue-600 text-4xl mb-4" />
-          </div>
-          <h2 className="text-lg font-semibold mb-2">Our Address</h2>
-          <p className="text-gray-600">
-            Near Dr. Pharande Dental Hospital, Opposite Lokmanya Hospital,
-            <br />
-            Chinchwad Railway Station Marg,
-            <br />
-            Chinchwad, Maharashtra 411033
+    <div className="min-h-screen bg-brand-neutral/50 text-brand-textH">
+      {/* Header Banner - Brand Teal Gradient */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#002f4b] via-[#0E3A45] to-[#009972] text-white py-16 px-6">
+        <div className="max-w-5xl mx-auto text-center relative z-10">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-emerald-200 text-xs sm:text-sm font-medium tracking-wide uppercase mb-4 border border-white/20">
+            Get In Touch
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display">
+            Contact Us
+          </h1>
+          <p className="mt-3 text-base sm:text-lg text-emerald-100 max-w-2xl mx-auto">
+            We’re here to help you anytime!
           </p>
         </div>
+        {/* Subtle decorative glow */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-30" 
+          style={{
+            background: "radial-gradient(circle at 20% 20%, rgba(0, 194, 154, 0.4), transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 161, 255, 0.3), transparent 50%)"
+          }}
+        />
+      </section>
 
-        {/* Email */}
-        <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-2xl transition">
-          <div className="flex justify-center">
-            <FaEnvelope className="text-blue-600 text-4xl mb-4" />
-          </div>
-          <h2 className="text-lg font-semibold mb-2">Email Us</h2>
+      {/* Main Container */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        {/* Quick Action Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
           <a
-            href="mailto:impulselab@gmail.com"
-            className="text-gray-700 hover:text-blue-600 transition"
+            href={LAB_PHONE_TEL}
+            className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#009B72] to-[#00C29A] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all min-w-[180px] text-base"
           >
-            impulselab@gmail.com
+            <FaPhoneAlt className="text-lg" />
+            <span>Call Now</span>
+          </a>
+
+          <a
+            href={LAB_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all min-w-[180px] text-base"
+          >
+            <FaWhatsapp className="text-xl" />
+            <span>Chat on WhatsApp</span>
+          </a>
+
+          <a
+            href={LAB_MAPS_SEARCH_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[#0E3A45] hover:bg-[#07242c] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all min-w-[180px] text-base"
+          >
+            <FaDirections className="text-xl" />
+            <span>Get Directions</span>
           </a>
         </div>
 
-        {/* Phone */}
-        <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:shadow-2xl transition">
-          <div className="flex justify-center">
-            <FaPhoneAlt className="text-blue-600 text-4xl mb-4" />
+        {/* Info Cards Grid (3 Main Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {/* Address Card */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-soft border border-brand-primary/10 hover:shadow-soft-hover transition-all flex flex-col items-center text-center group">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#009B72] flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-[#009B72] group-hover:text-white transition-all shadow-sm">
+              <FaMapMarkerAlt className="text-2xl" />
+            </div>
+            <h2 className="text-xl font-bold font-display text-brand-textH mb-3">Our Address</h2>
+            <p className="text-brand-textB text-sm sm:text-base leading-relaxed flex-grow">
+              {LAB_ADDRESS}
+            </p>
+            <a
+              href={LAB_MAPS_SEARCH_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#009B72] hover:text-[#0E3A45] transition-colors"
+            >
+              <span>View on Google Maps</span>
+              <FaExternalLinkAlt className="text-xs" />
+            </a>
           </div>
-          <h2 className="text-lg font-semibold mb-2">Call Us</h2>
-          <a
-            href="tel:+919876543210"
-            className="text-gray-700 hover:text-blue-600 transition"
-          >
-            +91 98765 43210
-          </a>
+
+          {/* Phone Card */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-soft border border-brand-primary/10 hover:shadow-soft-hover transition-all flex flex-col items-center text-center group">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#009B72] flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-[#009B72] group-hover:text-white transition-all shadow-sm">
+              <FaPhoneAlt className="text-2xl" />
+            </div>
+            <h2 className="text-xl font-bold font-display text-brand-textH mb-3">Call Us</h2>
+            <p className="text-brand-textB text-sm sm:text-base leading-relaxed mb-1">
+              Direct assistance & telephone enquiries
+            </p>
+            <div className="mt-2 flex-grow flex items-center">
+              <a
+                href={LAB_PHONE_TEL}
+                className="text-lg sm:text-xl font-bold text-[#0E3A45] hover:text-[#009B72] transition-colors tracking-wide"
+              >
+                {LAB_PHONE_DISPLAY}
+              </a>
+            </div>
+            <a
+              href={LAB_PHONE_TEL}
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#009B72] hover:text-[#0E3A45] transition-colors"
+            >
+              <span>Dial Now</span>
+              <FaPhoneAlt className="text-xs" />
+            </a>
+          </div>
+
+          {/* Email Card */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-soft border border-brand-primary/10 hover:shadow-soft-hover transition-all flex flex-col items-center text-center group">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#009B72] flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-[#009B72] group-hover:text-white transition-all shadow-sm">
+              <FaEnvelope className="text-2xl" />
+            </div>
+            <h2 className="text-xl font-bold font-display text-brand-textH mb-3">Email Us</h2>
+            <p className="text-brand-textB text-sm sm:text-base leading-relaxed mb-1">
+              Send us reports, queries, or feedback
+            </p>
+            <div className="mt-2 flex-grow flex items-center">
+              <a
+                href={LAB_EMAIL_MAILTO}
+                className="text-sm sm:text-base font-semibold text-[#0E3A45] hover:text-[#009B72] transition-colors break-all"
+              >
+                {LAB_EMAIL}
+              </a>
+            </div>
+            <a
+              href={LAB_EMAIL_MAILTO}
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#009B72] hover:text-[#0E3A45] transition-colors"
+            >
+              <span>Compose Email</span>
+              <FaEnvelope className="text-xs" />
+            </a>
+          </div>
         </div>
-      </div>
 
-      {/* WhatsApp Button */}
-      <div className="flex justify-center mt-6">
-        <a
-          href="https://wa.me/919876543210"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full shadow-lg transition"
-        >
-          <FaWhatsapp className="text-2xl" />
-          Chat on WhatsApp
-        </a>
-      </div>
+        {/* Working Hours Card (Placeholder) */}
+        <div className="mt-6 bg-white rounded-2xl p-5 shadow-soft border border-dashed border-[#009B72]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#009B72] flex items-center justify-center flex-shrink-0">
+              <FaClock className="text-lg" />
+            </div>
+            <div>
+              <span className="text-xs uppercase font-bold tracking-wider text-emerald-700 block">
+                Working Hours
+              </span>
+              <span className="text-sm sm:text-base font-semibold text-brand-textH">
+                {LAB_WORKING_HOURS}
+              </span>
+            </div>
+          </div>
+          <span className="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-medium">
+            Subject to confirmation
+          </span>
+        </div>
 
-      {/* Google Map Embed */}
-      <div className="mt-12">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.449193418451!2d73.8037!3d18.6297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf123456789%3A0xabcdef123456789!2sImpulse%20Pathology%20Lab!5e0!3m2!1sen!2sin!4v1695891793847"
-          width="100%"
-          height="400"
-          allowFullScreen
-          loading="lazy"
-          className="border-0 w-full"
-        ></iframe>
+        {/* Interactive Google Map Section */}
+        <div className="mt-12 bg-white rounded-3xl p-4 sm:p-6 shadow-soft border border-brand-primary/10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5 px-2">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold font-display text-brand-textH flex items-center gap-2">
+                <span>📍 Location Map</span>
+              </h2>
+              <p className="text-sm text-brand-textB mt-1">
+                Find {LAB_NAME} at Marunji Road, near Gurukrupa Hospital, Laxmi Chowk
+              </p>
+            </div>
+            <a
+              href={LAB_MAPS_SEARCH_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-50 text-[#009B72] hover:bg-[#009B72] hover:text-white font-semibold text-sm border border-emerald-200/60 shadow-sm transition-all"
+            >
+              <FaDirections className="text-base" />
+              <span>Open in Google Maps</span>
+            </a>
+          </div>
+
+          <div className="w-full h-[380px] sm:h-[440px] rounded-2xl overflow-hidden shadow-inner border border-gray-200 bg-gray-100">
+            <iframe
+              src={LAB_MAPS_EMBED_URL}
+              title={`${LAB_NAME} Location Map`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

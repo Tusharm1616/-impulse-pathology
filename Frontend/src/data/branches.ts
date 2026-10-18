@@ -19,7 +19,7 @@ export const branches: Branch[] = [
     lat: 18.5916,
     lng: 73.7345,
     phone: "+919373253743",
-    address: "Laxmi Chowk, Marunji Road, near Gurukrupa Hospital, Hinjawadi Phase 1, Hinjawadi Rajiv Gandhi Infotech Park, Pune, Maharashtra 411057",
+    address: "Laxmi Chowk, Marunji Road, Near Gurukrupa Hospital, Pune, Maharashtra – 411057",
     rating: 4.6,
     reviews: 46,
     openHours: "Open 24 hours, all 7 days",

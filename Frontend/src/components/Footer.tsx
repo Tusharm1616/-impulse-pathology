@@ -1,4 +1,12 @@
 import Link from "next/link";
+import {
+  LAB_ADDRESS,
+  LAB_PHONE_DISPLAY,
+  LAB_PHONE_TEL,
+  LAB_EMAIL,
+  LAB_EMAIL_MAILTO,
+  LAB_MAPS_SEARCH_URL,
+} from "@/lib/siteConfig";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -15,10 +23,9 @@ export default function Footer() {
               Leading pathology lab providing accurate diagnostic services with state-of-the-art technology and experienced professionals in Pune.
             </p>
             <div className="mt-6 space-y-3 text-sm">
-              <a href="tel:+919373253743" className="hover:text-brand-accent transition-colors block font-medium">📞 +91 93732 53743</a>
-              {/* TODO: confirm real business email */}
-              <a href="mailto:info@impulselab.com" className="hover:text-brand-accent transition-colors block font-medium">✉️ info@impulselab.com</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=Impulse+Pathology+Lab+Hinjawadi" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors block leading-relaxed">📍 Laxmi Chowk, Marunji Road, near Gurukrupa Hospital, Hinjawadi Phase 1, Hinjawadi Rajiv Gandhi Infotech Park, Pune, Maharashtra 411057</a>
+              <a href={LAB_PHONE_TEL} className="hover:text-brand-accent transition-colors block font-medium">📞 {LAB_PHONE_DISPLAY}</a>
+              <a href={LAB_EMAIL_MAILTO} className="hover:text-brand-accent transition-colors block font-medium">✉️ {LAB_EMAIL}</a>
+              <a href={LAB_MAPS_SEARCH_URL} target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors block leading-relaxed">📍 {LAB_ADDRESS}</a>
             </div>
           </div>
 
